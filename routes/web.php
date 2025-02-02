@@ -14,6 +14,11 @@
 Route::get('/', 'HomeController@getIndex')->name('home');
 Route::get('login', 'Auth\LoginController@getNewReply');
 
+#use App\Http\Controllers\BreedingRoller\RollerController; 
+
+#Route::post('/roll', [RollerController::class, 'roll'])->name('roll');
+#Route::post('/roll','BreedingRoller\RollerController@roll')->name('roll');
+
 // Logging in with Aliases
 Route::get('/login/redirect/{driver}', 'Auth\LoginController@getAuthRedirect');
 Route::get('/login/callback/{driver}', 'Auth\LoginController@getAuthCallback');
@@ -21,6 +26,9 @@ Route::get('/login/callback/{driver}', 'Auth\LoginController@getAuthCallback');
 // Registering with Aliases
 Route::get('register/{driver}', 'Auth\RegisterController@getRegisterWithDriver');
 Route::post('register/{driver}', 'Auth\RegisterController@postRegisterWithDriver');
+
+Route::get('/roll','BreedingRoller\RollerController@index');
+Route::post('/roll','BreedingRoller\RollerController@roll')->name('roll');
 
 // BROWSE
 require_once __DIR__.'/lorekeeper/browse.php';
