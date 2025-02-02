@@ -21,8 +21,8 @@ class RollerController extends Controller
         $request->validate([
             'geno1' => 'required|string',
             'geno2' => 'required|string',
-            'type1' => 'required|in:wyvern,drake,true_dragon',
-            'type2' => 'required|in:wyvern,drake,true_dragon',
+            'type1' => 'required|in:wyvern,drake,true dragon',
+            'type2' => 'required|in:wyvern,drake,true dragon',
             'element1' => 'nullable|in:fire,water,air,earth', 
             'elementTwo1' => 'nullable|in:none,fire,water,air,earth',
             'element2' => 'nullable|in:fire,water,air,earth',
