@@ -2,7 +2,7 @@
 
 namespace App\BreedingRoller;
 
-
+use Illuminate\Support\Arr; // For array helper functions
 
 class GeneRoller
 {
@@ -102,34 +102,28 @@ class GeneRoller
         return implode(' ', $dil) . ' ' . $base . ' ' . implode(' ', $mark);
     }
 
-    private function alleleRoller(array $genes)
+    private function alleleRoller(array $genes): array
     {
-        $alleles = [];
+        $alleleList = [];
 
         foreach ($genes as $gene) {
             if ($gene[0] != "n") {
-                $allele = $this->randomAllele($gene);
+                $alleles = [
+                    substr($gene, 0, strlen($gene) / 2),
+                    substr($gene, strlen($gene) / 2)
+                ];
             } else {
-                $allele = $this->randomAllele($gene); 
+                $alleles = [$gene[0], substr($gene, 1)];
             }
 
-            if ($allele !== "n") {
-                $alleles[] = $allele;
+            $allele = Arr::random($alleles); // Use Laravel's array helper
+
+            if ($allele != "n") {
+                $alleleList[] = $allele;
             }
         }
 
-        return $alleles;
-    }
-
-    private function randomAllele($gene)
-    {
-        if ($gene[0] != "n") {
-            $alleles = [$gene[0], substr($gene, 1)];
-        } else {
-            $alleles = [$gene[0], $gene[1]];
-        }
-
-        return $alleles[array_rand($alleles)];
+        return $alleleList;
     }
 
     private function combineAlleles(array $alleles1, array $alleles2)
